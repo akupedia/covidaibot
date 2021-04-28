@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>COVID-19 AI-Bot</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" media="all" href="setup.css">
+	<link rel="stylesheet" media="all" href="says.css">
+	<link rel="stylesheet" media="all" href="reply.css">
+	<link rel="stylesheet" media="all" href="typing.css">
+	<link rel="stylesheet" media="all" href="input.css">
+	<style>
+	body {
+		background: #dcdde0;
+	}
+	
+	.bubble-container {
+		height: 100vh;
+	}
+	
+	.bubble-container .input-wrap textarea {
+		margin: 0;
+		width: calc(100% - 30px);
+	}
+	</style>
+	<style>
+	p {
+		text-align: center;
+	}
+	</style>
+	<script async="" src="app.js"></script>
+	<script>
+	window.dataLayer = window.dataLayer || [];
+
+	function gtag() {
+		dataLayer.push(arguments);
+	}
+	gtag('js', new Date());
+	gtag('config', 'G-BBF3BD4PRM');
+	</script>
+</head>
+
+<body>
+	<p>This AI Bot shows relevant & latest feeds from Twitter, please reach out to <a href="https://facebook.com/akupedia" target="_blank" rel="noopener noreferrer">Akash Angle</a>.</p>
+	<div id="chat" class="bubble-container">
+		<div class="bubble-wrap" style="padding-bottom: 100px;">
+			<div class="bubble say" style="width: 336px;"><span class="bubble-content"></div>
+
+  <script src="Bubbles.js"></script>
+  <script>
+    var chatWindow = new Bubbles(document.getElementById("chat"), "chatWindow", {
+      inputCallbackFn: function (o) {
+        var miss = function () {
+          chatWindow.talk(
+            {
+              "i-dont-get-it": {
+                says: [
+                  "Sorry, that response isn't supported yet 😕"
+                ],
+                reply: o.convo[o.standingAnswer].reply
+              }
+            },
+            "i-dont-get-it"
+          )
+        }
+
+        var match = function (key) {
+          setTimeout(function () {
+            chatWindow.talk(convo, key)
+          }, 600)
+        }
+
+        var strip = function (text) {
+          return text.toLowerCase().replace(/[\s.,\/#!$%\^&\*;:{}=\-_'"`~()]/g, "")
+        }
+
+        var found = false
+        o.convo[o.standingAnswer].reply.forEach(function (e, i) {
+          strip(e.question).includes(strip(o.input)) && o.input.length > 0
+            ? (found = e.answer)
+            : found ? null : (found = false)
+        })
+        found ? match(found) : miss()
+      }
+    })
+
+    var convo = {
+      ice: {
+        says: ["Welcome to the COVID-19 Resources page.", "The goal of this app is to curate the relevant post. Please verify. (इस ऐप का लक्ष्य संबंधित पोस्ट को क्यूरेट करना है। कृपया सत्यापित करें।)", "What do you need help with? Click below 👇 (आपको कैसी सहायता चाहिए? नीचे क्लिक करें 👇)"],
+        reply: [
+          {
+            question: "ICU (आईसीयू)",
+            answer: "icufunc"
+          },
+          {
+            question: "Beds (बेड)",
+            answer: "bedfunc"
+          },
+          {
+            question: "Oxygen (ऑक्सीजन)",
+            answer: "oxygenfunc"
+          },
+          {
+            question: "Ventilator (वेंटिलेटर)",
+            answer: "ventilatorfunc"
+          },
+          {
+            question: "Plasma (प्लाज्मा)",
+            answer: "plasma"
+          },
+          {
+            question: "Medicine (दवा)",
+            answer: "medicine"
+          },
+          {
+            question: "Oxygen Concentrator (ऑक्सीजन concentrator)",
+            answer: "oxygenconcfunc"
+          },
+          {
+            question: "Food (खाना)",
+            answer: "foodfunc"
+          },
+          {
+            question: "Vaccination (टीका)",
+            answer: "vaccinefunc"
+          }
+        ]
+      },
+      
+      "plasma": {
+        says: ["Are you looking for plasma for a specific blood group or all blood groups? (क्या आप एक विशिष्ट रक्त समूह या सभी रक्त समूहों के लिए प्लाज्मा की तलाश कर रहे हैं?)"],
+        reply: [
+          {
+            question: "All blood group - Preferred (सभी रक्त समूह)",
+            answer: "plasmafunc"
+          },
+          {
+            question: "Specific blood group (विशिष्ट रक्त समूह)",
+            answer: "Plasmagroup"
+          }
+        ]
+      },
+
+     "Plasmagroup": {
+        says: ["You are looking for plasma for which blood groups? (आप कौन से रक्त समूह के लिए प्लाज्मा की तलाश कर रहे हैं?)"],
+        reply: [  
+          {
+            question: "A+",
+            answer: "plasmafuncap"
+          },
+          {
+            question: "A-",
+            answer: "plasmafuncan"
+          },
+          {
+            question: "B+",
+            answer: "plasmafuncbp"
+          },
+          {
+            question: "B-",
+            answer: "plasmafuncbn"
+          },
+          {
+            question: "O+",
+            answer: "plasmafuncop"
+          },
+          {
+            question: "O-",
+            answer: "plasmafuncon"
+          },
+          {
+            question: "AB+",
+            answer: "plasmafuncabp"
+          },
+          {
+            question: "AB-",
+            answer: "plasmafuncabn"
+          }
+        ]
+      },      
+      
+      "medicine": {
+        says: ["Which medicine are you looking for? (आप किस दवा की तलाश कर रहे हैं?)"],
+        reply: [
+          {
+            question: "Remdesivir (रेमेडीसविर)",
+            answer: "remdesivirfunc"
+          },
+          {
+            question: "Tocilizumab (टोसिलिज़ुमाब)",
+            answer: "tocilizumabfunc"
+          },
+          {
+            question: "Fabiflu (फैबिफ्लू)",
+            answer: "fabiflufunc"
+          },
+          {
+            question: "Favivir (फैवीवीर)",
+            answer: "favivirfunc"
+          },
+          {
+            question: "Favipiravir",
+            answer: "favipiravirfunc"
+          }
+        ]
+      }
+    }
+
+    icufunc = function () {
+      var city = window.prompt("Enter the city where you need help: (आपको किस शहर में मदद की ज़रूरत है?)");
+      if (!city){
+        city = 'India'
+      }
+      searchquery = "verified " + city + " (ICU OR icu) " + "-'not verified' -'un verified' -urgent -unverified -needed -required -need -needs -requirement";
+      var todayDate = new Date();
+      var numberOfDays = 2;
+      todayDate.setDate(todayDate.getDate() - numberOfDays);
+      var dd = todayDate.getDate();
+      var mm = todayDate.getMonth() + 1;
+      var y = todayDate.getFullYear();
+      var queryDate = y + '-' + mm + '-' + dd;
+      twitterquery = "https://twitter.com/search?q=" + searchquery + " since%3A" + queryDate + '&f=live';
+      if (window.confirm("Would you like to go to Twitter to check the relevant posts? (क्या आप संबंधित पोस्टों की जांच करने के लिए ट्विटर पर जाना चाहेंगे?)")) {
+        window.location.href = twitterquery, '_blank';
+      }
+      chatWindow.talk(convo, "ice")
+    }
+
+    bedfunc = function () {
+      var city = window.prompt("Enter the city where you need help: (आपको किस शहर में मदद की ज़रूरत है?)");
+      if (!city){
+        city = 'India'
+      }
+      searchquery = "verified (bed OR beds) -unverified -'un verified' -needed -required -need -needs -requirement " + city;
+      var todayDate = new Date();
+      var numberOfDays = 2;
+      todayDate.setDate(todayDate.getDate() - numberOfDays);
+      var dd = todayDate.getDate();
+      var mm = todayDate.getMonth() + 1;
+      var y = todayDate.getFullYear();
+      var queryDate = y + '-' + mm + '-' + dd;
+      twitterquery = "https://twitter.com/search?q=" + searchquery + " since%3A" + queryDate + '&f=live';
+      if (window.confirm("Would you like to go to Twitter to check the relevant posts? (क्या आप संबंधित पोस्टों की जांच करने के लिए ट्विटर पर जाना चाहेंगे?)")) {
+        window.location.href = twitterquery, '_blank';
+      }
+      chatWindow.talk(convo, "ice")
+    }    
+    
+    oxygenfunc = function () {
+      var city = window.prompt("Enter the city where you need help: (आपको किस शहर में मदद की ज़रूरत है?)");
+      if (!city){
+        city = 'India'
+      }
+      searchquery = "verified " + city + " oxygen " + "-'not verified' -'un verified' -urgent -unverified -needed -required -need -needs";
+      var todayDate = new Date();
+      var numberOfDays = 2;
+      todayDate.setDate(todayDate.getDate() - numberOfDays);
+      var dd = todayDate.getDate();
+      var mm = todayDate.getMonth() + 1;
+      var y = todayDate.getFullYear();
+      var queryDate = y + '-' + mm + '-' + dd;
+      twitterquery = "https://twitter.com/search?q=" + searchquery + " since%3A" + queryDate + '&f=live';
+      if (window.confirm("Would you like to go to Twitter to check the relevant posts? (क्या आप संबंधित पोस्टों की जांच करने के लिए ट्विटर पर जाना चाहेंगे?)")) {
+        window.location.href = twitterquery, '_blank';
+      }
+      chatWindow.talk(convo, "ice")
+    }
+
+    ventilatorfunc = function () {
+      var city = window.prompt("Enter the city where you need help: (आपको किस शहर में मदद की ज़रूरत है?)");
+      if (!city){
+        city = 'India'
+      }
+      searchquery = "verified " + city + " ventilator " + "-'not verified' -'un verified' -urgent -unverified -needed -required -need -needs";
+      var todayDate = new Date();
+      var numberOfDays = 2;
+      todayDate.setDate(todayDate.getDate() - numberOfDays);
+      var dd = todayDate.getDate();
+      var mm = todayDate.getMonth() + 1;
+      var y = todayDate.getFullYear();
+      var queryDate = y + '-' + mm + '-' + dd;
+      twitterquery = "https://twitter.com/search?q=" + searchquery + " since%3A" + queryDate + '&f=live';
+      if (window.confirm("Would you like to go to Twitter to check the relevant posts? (क्या आप संबंधित पोस्टों की जांच करने के लिए ट्विटर पर जाना चाहेंगे?)")) {
+        window.location.href = twitterquery, '_blank';
+      }
+      chatWindow.talk(convo, "ice")
+    }
+
+    plasmafunc = function () {
+      var city = window.prompt("Enter the city where you need help: (आपको किस शहर में मदद की ज़रूरत है?)");
+      if (!city){
+        city = 'India'
+      }
+      searchquery = "verified " + city + " plasma " + "-'not verified' -'un verified' -urgent -unverified -needed -required -need -needs";
+      var todayDate = new Date();
+      var numberOfDays = 2;
+      todayDate.setDate(todayDate.getDate() - numberOfDays);
+      var dd = todayDate.getDate();
+      var mm = todayDate.getMonth() + 1;
+      var y = todayDate.getFullYear();
+      var queryDate = y + '-' + mm + '-' + dd;
+      twitterquery = "https://twitter.com/search?q=" + searchquery + " since%3A" + queryDate + '&f=live';
+      if (window.confirm("Would you like to go to Twitter to check the relevant posts? (क्या आप संबंधित पोस्टों की जांच करने के लिए ट्विटर पर जाना चाहेंगे?)")) {
+        window.location.href = twitterquery, '_blank';
+      }
+      chatWindow.talk(convo, "ice")
+    }
+
+    remdesivirfunc = function () {
+      var city = window.prompt("Enter the city where you need help: (आपको किस शहर में मदद की ज़रूरत है?)");
+      if (!city){
+        city = 'India'
+      }
+      searchquery = "verified " + city + " (remdesivir OR remdesevir OR ramdesivir OR ramdesevir) " + "-'not verified' -'un verified' -urgent -unverified -needed -required -need -needs";
+      var todayDate = new Date();
+      var numberOfDays = 2;
+      todayDate.setDate(todayDate.getDate() - numberOfDays);
+      var dd = todayDate.getDate();
+      var mm = todayDate.getMonth() + 1;
+      var y = todayDate.getFullYear();
+      var queryDate = y + '-' + mm + '-' + dd;
+      twitterquery = "https://twitter.com/search?q=" + searchquery + " since%3A" + queryDate + '&f=live';
+      if (window.confirm("Would you like to go to Twitter to check the relevant posts? (क्या आप संबंधित पोस्टों की जांच करने के लिए ट्विटर पर जाना चाहेंगे?)")) {
+        window.location.href = twitterquery, '_blank';
+      }
+      chatWindow.talk(convo, "ice")
+    }
+
+    tocilizumabfunc = function () {
+      var city = window.prompt("Enter the city where you need help: (आपको किस शहर में मदद की ज़रूरत है?)");
+      if (!city){
+        city = 'India'
+      }
+      searchquery = "verified " + city + " tocilizumab " +   "-'not verified' -'un verified' -urgent -unverified -needed -required -need -needs";
+      var todayDate = new Date();
+      var numberOfDays = 2;
+      todayDate.setDate(todayDate.getDate() - numberOfDays);
+      var dd = todayDate.getDate();
+      var mm = todayDate.getMonth() + 1;
+      var y = todayDate.getFullYear();
+      var queryDate = y + '-' + mm + '-' + dd;
+      twitterquery = "https://twitter.com/search?q=" + searchquery + " since%3A" + queryDate + '&f=live';
+      if (window.confirm("Would you like to go to Twitter to check the relevant posts? (क्या आप संबंधित पोस्टों की जांच करने के लिए ट्विटर पर जाना चाहेंगे?)")) {
+        window.location.href = twitterquery, '_blank';
+      }
+      chatWindow.talk(convo, "ice")
+    }
+
+    fabiflufunc = function () {
+      var city = window.prompt("Enter the city where you need help: (आपको किस शहर में मदद की ज़रूरत है?)");
+      if (!city){
+        city = 'India'
+      }
+      searchquery = "verified " + city + " (fabiflu OR faviflu) " +  "-'not verified' -'un verified' -urgent -unverified -needed -required -need -needs";
+      var todayDate = new Date();
+      var numberOfDays = 2;
+      todayDate.setDate(todayDate.getDate() - numberOfDays);
+      var dd = todayDate.getDate();
+      var mm = todayDate.getMonth() + 1;
+      var y = todayDate.getFullYear();
+      var queryDate = y + '-' + mm + '-' + dd;
+      twitterquery = "https://twitter.com/search?q=" + searchquery + " since%3A" + queryDate + '&f=live';
+      if (window.confirm("Would you like to go to Twitter to check the relevant posts? (क्या आप संबंधित पोस्टों की जांच करने के लिए ट्विटर पर जाना चाहेंगे?)")) {
+        window.location.href = twitterquery, '_blank';
+      }
+      chatWindow.talk(convo, "ice")
+    }
+
+    favivirfunc = function () {
+      var city = window.prompt("Enter the city where you need help: (आपको किस शहर में मदद की ज़रूरत है?)");
+      if (!city){
+        city = 'India'
+      }
+      searchquery = "verified " + city + " (favivir OR favibir OR fabivir OR fabibir OR faviveer) " +  "-'not verified' -'un verified' -urgent -unverified -needed -required -need -needs";
+      var todayDate = new Date();
+      var numberOfDays = 2;
+      todayDate.setDate(todayDate.getDate() - numberOfDays);
+      var dd = todayDate.getDate();
+      var mm = todayDate.getMonth() + 1;
+      var y = todayDate.getFullYear();
+      var queryDate = y + '-' + mm + '-' + dd;
+      twitterquery = "https://twitter.com/search?q=" + searchquery + " since%3A" + queryDate + '&f=live';
+      if (window.confirm("Would you like to go to Twitter to check the relevant posts? (क्या आप संबंधित पोस्टों की जांच करने के लिए ट्विटर पर जाना चाहेंगे?)")) {
+        window.location.href = twitterquery, '_blank';
+      }
+      chatWindow.talk(convo, "ice")
+    }
+
+    favipiravirfunc = function () {
+      var city = window.prompt("Enter the city where you need help: (आपको किस शहर में मदद की ज़रूरत है?)");
+      if (!city){
+        city = 'India'
+      }
+      searchquery = "verified " + city + " (favipiravir OR favipirabir OR favipiraveer OR fabipiravir) " +  "-'not verified' -'un verified' -urgent -unverified -needed -required -need -needs";
+      var todayDate = new Date();
+      var numberOfDays = 2;
+      todayDate.setDate(todayDate.getDate() - numberOfDays);
+      var dd = todayDate.getDate();
+      var mm = todayDate.getMonth() + 1;
+      var y = todayDate.getFullYear();
+      var queryDate = y + '-' + mm + '-' + dd;
+      twitterquery = "https://twitter.com/search?q=" + searchquery + " since%3A" + queryDate + '&f=live';
+      if (window.confirm("Would you like to go to Twitter to check the relevant posts? (क्या आप संबंधित पोस्टों की जांच करने के लिए ट्विटर पर जाना चाहेंगे?)")) {
+        window.location.href = twitterquery, '_blank';
+      }
+      chatWindow.talk(convo, "ice")
+    }
+
+    vaccinefunc = function () {
+      var city = window.prompt("Enter the city where you need help: (आपको किस शहर में मदद की ज़रूरत है?)");
+      if (!city){
+        city = 'India'
+      }
+      searchquery = "verified " + city + " (vaccine OR vaccination OR covaxin OR covishield) " +  "-'not verified' -'un verified' -urgent -unverified -needed -required -need -needs";
+      var todayDate = new Date();
+      var numberOfDays = 2;
+      todayDate.setDate(todayDate.getDate() - numberOfDays);
+      var dd = todayDate.getDate();
+      var mm = todayDate.getMonth() + 1;
+      var y = todayDate.getFullYear();
+      var queryDate = y + '-' + mm + '-' + dd;
+      twitterquery = "https://twitter.com/search?q=" + searchquery + " since%3A" + queryDate + '&f=live';
+      if (window.confirm("Would you like to go to Twitter to check the relevant posts? (क्या आप संबंधित पोस्टों की जांच करने के लिए ट्विटर पर जाना चाहेंगे?)")) {
+        window.location.href = twitterquery, '_blank';
+      }
+      chatWindow.talk(convo, "ice")
+    }
+
+    oxygenconcfunc = function () {
+      var city = window.prompt("Enter the city where you need help: (आपको किस शहर में मदद की ज़रूरत है?)");
+      if (!city){
+        city = 'India'
+      }
+      searchquery = "verified " + city + " (oxygen concentrator OR O2 concentrator) " +  "-'not verified' -'un verified' -urgent -unverified -needed -required -need -needs";
+      var todayDate = new Date();
+      var numberOfDays = 2;
+      todayDate.setDate(todayDate.getDate() - numberOfDays);
+      var dd = todayDate.getDate();
+      var mm = todayDate.getMonth() + 1;
+      var y = todayDate.getFullYear();
+      var queryDate = y + '-' + mm + '-' + dd;
+      twitterquery = "https://twitter.com/search?q=" + searchquery + " since%3A" + queryDate + '&f=live';
+      if (window.confirm("Would you like to go to Twitter to check the relevant posts? (क्या आप संबंधित पोस्टों की जांच करने के लिए ट्विटर पर जाना चाहेंगे?)")) {
+        window.location.href = twitterquery, '_blank';
+      }
+      chatWindow.talk(convo, "ice")
+    }
+
+    plasmafuncap = function () {
+      var city = window.prompt("Enter the city where you need help: (आपको किस शहर में मदद की ज़रूरत है?)");
+      if (!city){
+        city = 'India'
+      }
+      searchquery = "verified " + city + " plasma A+ " + "-not verified -unverified -needed -required -need -needs";
+      var todayDate = new Date();
+      var numberOfDays = 4;
+      todayDate.setDate(todayDate.getDate() - numberOfDays);
+      var dd = todayDate.getDate();
+      var mm = todayDate.getMonth() + 1;
+      var y = todayDate.getFullYear();
+      var queryDate = y + '-' + mm + '-' + dd;
+      twitterquery = "https://twitter.com/search?q=" + searchquery + " since%3A" + queryDate + '&f=live';
+      if (window.confirm("Would you like to go to Twitter to check the relevant posts? (क्या आप संबंधित पोस्टों की जांच करने के लिए ट्विटर पर जाना चाहेंगे?)")) {
+        window.location.href = twitterquery, '_blank';
+      }
+      chatWindow.talk(convo, "ice")
+    }
+
+    plasmafuncan = function () {
+      var city = window.prompt("Enter the city where you need help: (आपको किस शहर में मदद की ज़रूरत है?)");
+      if (!city){
+        city = 'India'
+      }
+      searchquery = "verified " + city + " plasma A- " +  "-'not verified' -'un verified' -urgent -unverified -needed -required -need -needs";
+      var todayDate = new Date();
+      var numberOfDays = 4;
+      todayDate.setDate(todayDate.getDate() - numberOfDays);
+      var dd = todayDate.getDate();
+      var mm = todayDate.getMonth() + 1;
+      var y = todayDate.getFullYear();
+      var queryDate = y + '-' + mm + '-' + dd;
+      twitterquery = "https://twitter.com/search?q=" + searchquery + " since%3A" + queryDate + '&f=live';
+      if (window.confirm("Would you like to go to Twitter to check the relevant posts? (क्या आप संबंधित पोस्टों की जांच करने के लिए ट्विटर पर जाना चाहेंगे?)")) {
+        window.location.href = twitterquery, '_blank';
+      }
+      chatWindow.talk(convo, "ice")
+    }
+
+    plasmafuncbp = function () {
+      var city = window.prompt("Enter the city where you need help: (आपको किस शहर में मदद की ज़रूरत है?)");
+      if (!city){
+        city = 'India'
+      }
+      searchquery = "verified " + city + " plasma B+ " +  "-'not verified' -'un verified' -urgent -unverified -needed -required -need -needs";
+      var todayDate = new Date();
+      var numberOfDays = 4;
+      todayDate.setDate(todayDate.getDate() - numberOfDays);
+      var dd = todayDate.getDate();
+      var mm = todayDate.getMonth() + 1;
+      var y = todayDate.getFullYear();
+      var queryDate = y + '-' + mm + '-' + dd;
+      twitterquery = "https://twitter.com/search?q=" + searchquery + " since%3A" + queryDate + '&f=live';
+      if (window.confirm("Would you like to go to Twitter to check the relevant posts? (क्या आप संबंधित पोस्टों की जांच करने के लिए ट्विटर पर जाना चाहेंगे?)")) {
+        window.location.href = twitterquery, '_blank';
+      }
+      chatWindow.talk(convo, "ice")
+    }
+
+    plasmafuncbn = function () {
+      var city = window.prompt("Enter the city where you need help: (आपको किस शहर में मदद की ज़रूरत है?)");
+      if (!city){
+        city = 'India'
+      }
+      searchquery = "verified " + city + " plasma B- " +  "-'not verified' -'un verified' -urgent -unverified -needed -required -need -needs";
+      var todayDate = new Date();
+      var numberOfDays = 4;
+      todayDate.setDate(todayDate.getDate() - numberOfDays);
+      var dd = todayDate.getDate();
+      var mm = todayDate.getMonth() + 1;
+      var y = todayDate.getFullYear();
+      var queryDate = y + '-' + mm + '-' + dd;
+      twitterquery = "https://twitter.com/search?q=" + searchquery + " since%3A" + queryDate + '&f=live';
+      if (window.confirm("Would you like to go to Twitter to check the relevant posts? (क्या आप संबंधित पोस्टों की जांच करने के लिए ट्विटर पर जाना चाहेंगे?)")) {
+        window.location.href = twitterquery, '_blank';
+      }
+      chatWindow.talk(convo, "ice")
+    }
+
+    plasmafuncop = function () {
+      var city = window.prompt("Enter the city where you need help: (आपको किस शहर में मदद की ज़रूरत है?)");
+      if (!city){
+        city = 'India'
+      }
+      searchquery = "verified " + city + " plasma O+ " +  "-'not verified' -'un verified' -urgent -unverified -needed -required -need -needs";
+      var todayDate = new Date();
+      var numberOfDays = 4;
+      todayDate.setDate(todayDate.getDate() - numberOfDays);
+      var dd = todayDate.getDate();
+      var mm = todayDate.getMonth() + 1;
+      var y = todayDate.getFullYear();
+      var queryDate = y + '-' + mm + '-' + dd;
+      twitterquery = "https://twitter.com/search?q=" + searchquery + " since%3A" + queryDate + '&f=live';
+      if (window.confirm("Would you like to go to Twitter to check the relevant posts? (क्या आप संबंधित पोस्टों की जांच करने के लिए ट्विटर पर जाना चाहेंगे?)")) {
+        window.location.href = twitterquery, '_blank';
+      }
+      chatWindow.talk(convo, "ice")
+    }
+
+    plasmafuncon = function () {
+      var city = window.prompt("Enter the city where you need help: (आपको किस शहर में मदद की ज़रूरत है?)");
+      if (!city){
+        city = 'India'
+      }
+      searchquery = "verified " + city + " plasma O- " +  "-'not verified' -'un verified' -urgent -unverified -needed -required -need -needs";
+      var todayDate = new Date();
+      var numberOfDays = 4;
+      todayDate.setDate(todayDate.getDate() - numberOfDays);
+      var dd = todayDate.getDate();
+      var mm = todayDate.getMonth() + 1;
+      var y = todayDate.getFullYear();
+      var queryDate = y + '-' + mm + '-' + dd;
+      twitterquery = "https://twitter.com/search?q=" + searchquery + " since%3A" + queryDate + '&f=live';
+      if (window.confirm("Would you like to go to Twitter to check the relevant posts? (क्या आप संबंधित पोस्टों की जांच करने के लिए ट्विटर पर जाना चाहेंगे?)")) {
+        window.location.href = twitterquery, '_blank';
+      }
+      chatWindow.talk(convo, "ice")
+    }
+
+    plasmafuncabp = function () {
+      var city = window.prompt("Enter the city where you need help: (आपको किस शहर में मदद की ज़रूरत है?)");
+      if (!city){
+        city = 'India'
+      }
+      searchquery = "verified " + city + " plasma AB+ " +  "-'not verified' -'un verified' -urgent -unverified -needed -required -need -needs";
+      var todayDate = new Date();
+      var numberOfDays = 4;
+      todayDate.setDate(todayDate.getDate() - numberOfDays);
+      var dd = todayDate.getDate();
+      var mm = todayDate.getMonth() + 1;
+      var y = todayDate.getFullYear();
+      var queryDate = y + '-' + mm + '-' + dd;
+      twitterquery = "https://twitter.com/search?q=" + searchquery + " since%3A" + queryDate + '&f=live';
+      if (window.confirm("Would you like to go to Twitter to check the relevant posts? (क्या आप संबंधित पोस्टों की जांच करने के लिए ट्विटर पर जाना चाहेंगे?)")) {
+        window.location.href = twitterquery, '_blank';
+      }
+      chatWindow.talk(convo, "ice")
+    }
+
+    plasmafuncabn = function () {
+      var city = window.prompt("Enter the city where you need help: (आपको किस शहर में मदद की ज़रूरत है?)");
+      if (!city){
+        city = 'India'
+      }
+      searchquery = "verified " + city + " plasma AB- " +  "-'not verified' -'un verified' -urgent -unverified -needed -required -need -needs";
+      var todayDate = new Date();
+      var numberOfDays = 4;
+      todayDate.setDate(todayDate.getDate() - numberOfDays);
+      var dd = todayDate.getDate();
+      var mm = todayDate.getMonth() + 1;
+      var y = todayDate.getFullYear();
+      var queryDate = y + '-' + mm + '-' + dd;
+      twitterquery = "https://twitter.com/search?q=" + searchquery + " since%3A" + queryDate + '&f=live';
+      if (window.confirm("Would you like to go to Twitter to check the relevant posts? (क्या आप संबंधित पोस्टों की जांच करने के लिए ट्विटर पर जाना चाहेंगे?)")) {
+        window.location.href = twitterquery, '_blank';
+      }
+      chatWindow.talk(convo, "ice")
+    }    
+
+    foodfunc = function () {
+      twitterquery = "https://covidmealsforindia.com";
+      if (window.confirm("Would you like to go to the website to find food?")) {
+        window.location.href = twitterquery, '_blank';
+      }
+      chatWindow.talk(convo, "ice")
+    }
+    
+    
+    chatWindow.talk(convo)
+  </script>
+
+</body></html>
